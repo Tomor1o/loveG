@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Моё сердце ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins', sans-serif;
+}
+
+body{
+    height:100vh;
+    background:linear-gradient(135deg,#ff758c,#ff7eb3,#ffb199);
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    text-align:center;
+}
+
+/* Фоновые сердечки */
+.bg-heart{
+    position:absolute;
+    bottom:-50px;
+    font-size:20px;
+    opacity:0.7;
+    animation:floatUp linear infinite;
+    pointer-events:none;
+}
+
+@keyframes floatUp{
+    0%{ transform:translateY(0) scale(1); opacity:0.8; }
+    100%{ transform:translateY(-110vh) scale(1.8); opacity:0; }
+}
+
+/* Плавающие слова */
+.word{
+    position:absolute;
+    font-size:14px;
+    opacity:0.4;
+    animation: drift 15s linear infinite;
+    pointer-events:none;
+}
+
+@keyframes drift{
+    0%{ transform:translateX(-10vw); }
+    100%{ transform:translateX(110vw); }
+}
+
+/* Карточка */
+.card{
+    width:90%;
+    max-width:420px;
+    padding:35px 25px;
+    border-radius:25px;
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(15px);
+    box-shadow:0 20px 50px rgba(0,0,0,0.25);
+    z-index:2;
+}
+
+h1{
+    font-size:22px;
+}
+
+button{
+    margin-top:20px;
+    padding:12px 25px;
+    border:none;
+    border-radius:30px;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    background:white;
+    color:#ff4b7d;
+    transition:0.3s;
+}
+
+button:active{
+    transform:scale(0.95);
+}
+
+.big-heart{
+    font-size:60px;
+    margin-top:15px;
+    transform:scale(0);
+    transition:0.8s;
+}
+
+.big-heart.show{
+    transform:scale(1.2);
+    animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+    0%{ transform:scale(1.2); }
+    50%{ transform:scale(1.4); }
+    100%{ transform:scale(1.2); }
+}
+
+.message{
+    opacity:0;
+    margin-top:15px;
+    transition:1.5s;
+    font-size:14px;
+}
+
+.message.show{
+    opacity:1;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h1>💖 У меня для тебя кое-что есть...</h1>
+    <button onclick="openHeart()">Открой моё сердце</button>
+
+    <div class="big-heart" id="bigHeart">❤️</div>
+
+    <div class="message" id="loveMessage">
+        <p>Я люблю тебя ❤️</p>
+        <p>I love you 💕</p>
+        <p>Je t’aime 💖</p>
+        <p>Te amo 💘</p>
+        <p>Ich liebe dich 💓</p>
+        <p>Ты — моё счастье ✨</p>
+    </div>
+</div>
+
+<script>
+function openHeart(){
+    document.getElementById("bigHeart").classList.add("show");
+    document.getElementById("loveMessage").classList.add("show");
+}
+
+/* Фоновые сердечки */
+function createBgHeart(){
+    const heart=document.createElement("div");
+    heart.classList.add("bg-heart");
+    heart.innerHTML="❤️";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(Math.random()*20+10)+"px";
+    heart.style.animationDuration=(Math.random()*5+5)+"s";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),10000);
+}
+setInterval(createBgHeart,400);
+
+/* Красивые слова */
+const words=["Love","Amour","Amore","Любовь","Forever","Ты","Счастье","My Heart"];
+
+function createWord(){
+    const word=document.createElement("div");
+    word.classList.add("word");
+    word.innerHTML=words[Math.floor(Math.random()*words.length)];
+    word.style.top=Math.random()*100+"vh";
+    word.style.animationDuration=(Math.random()*10+10)+"s";
+    document.body.appendChild(word);
+    setTimeout(()=>word.remove(),20000);
+}
+setInterval(createWord,2000);
+
+</script>
+
+</body>
+</html>
